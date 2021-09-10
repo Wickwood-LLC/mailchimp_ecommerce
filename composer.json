@@ -22,6 +22,6 @@
     "source": "http://cgit.drupalcode.org/mailchimp_ecommerce"
   },
   "require": {
-    "drupal/mailchimp": "^1.0"
+    "drupal/mailchimp": "^2.0"
   }
 }
