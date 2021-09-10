@@ -117,7 +117,7 @@ class OrderEventSubscriber implements EventSubscriberInterface {
     // An anonymous user has logged in or created an account after populating
     // a cart with items. This is the first point we can send this cart to
     // Mailchimp as we are now able to get the user's email address.
-    $account = $event->getAccount();
+    $account = $event->getCustomer();
     $customer['email_address'] = $account->getEmail();
     $billing_profile = $order->getBillingProfile();
 

@@ -35,7 +35,7 @@ class ProductHandler implements ProductHandlerInterface {
 
       //TODO: If add fails with product exists error code, run an update here.
       mailchimp_ecommerce_log_error_message('Unable to add product: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 
@@ -71,12 +71,12 @@ class ProductHandler implements ProductHandlerInterface {
     }
     catch (\Exception $e) {
       if ($e->getCode() == 404) {
-        drupal_set_message('This product doesn\'t exist in Mailchimp. Please sync all your products.');
+        \Drupal::messenger()->addStatus('This product doesn\'t exist in Mailchimp. Please sync all your products.');
       }
       else {
         // An actual error occurred; pass on the exception.
         mailchimp_ecommerce_log_error_message('Unable to update product: ' . $e->getMessage());
-        drupal_set_message($e->getMessage(), 'error');
+        \Drupal::messenger()->addError($e->getMessage());
       }
     }
   }
@@ -97,7 +97,7 @@ class ProductHandler implements ProductHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to delete product: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 
@@ -125,7 +125,7 @@ class ProductHandler implements ProductHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to add product variant: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 
@@ -153,7 +153,7 @@ class ProductHandler implements ProductHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to get product variant: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
 
     return $product_variant;
@@ -230,7 +230,7 @@ class ProductHandler implements ProductHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to delete product variant: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 

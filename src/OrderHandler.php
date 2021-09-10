@@ -27,7 +27,7 @@ class OrderHandler implements OrderHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to get order: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
 
     return NULL;
@@ -61,7 +61,7 @@ class OrderHandler implements OrderHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to add an order: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 
@@ -81,7 +81,7 @@ class OrderHandler implements OrderHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to update an order: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 

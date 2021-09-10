@@ -17,7 +17,7 @@ abstract class MailchimpEcommerceSyncOrders extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form['sync_orders'] = [
       '#type' => 'checkbox',
       '#title' => t('Sync Orders'),

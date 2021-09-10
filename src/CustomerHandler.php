@@ -47,7 +47,7 @@ class CustomerHandler implements CustomerHandlerInterface {
       }
       else {
         mailchimp_ecommerce_log_error_message('Unable to delete a customer: ' . $e->getMessage());
-        drupal_set_message($e->getMessage(), 'error');
+        \Drupal::messenger()->addError($e->getMessage());
       }
     }
 
@@ -86,7 +86,7 @@ class CustomerHandler implements CustomerHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to add a customer: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 
@@ -106,7 +106,7 @@ class CustomerHandler implements CustomerHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to delete a customer: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
   /**

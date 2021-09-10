@@ -2,6 +2,7 @@
 
 namespace Drupal\mailchimp_ecommerce_commerce\Form;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\mailchimp_ecommerce\Form\MailchimpEcommerceSyncOrders;
 
 class MailchimpEcommerceCommerceSyncOrders extends MailchimpEcommerceSyncOrders {
@@ -9,7 +10,7 @@ class MailchimpEcommerceCommerceSyncOrders extends MailchimpEcommerceSyncOrders 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
 
     return $form;

@@ -2,6 +2,7 @@
 
 namespace Drupal\mailchimp_ecommerce\Form;
 
+use Drupal\Core\Link;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormInterface;
@@ -140,7 +141,7 @@ class MailchimpEcommerceAdminSettings extends ConfigFormBase {
     $has_images = false;
     $desired_type = '';
 
-    $field_map = \Drupal::entityManager()->getFieldMap();
+    $field_map = \Drupal::service('entity_field.manager')->getFieldMap();
     $moduleHandler = \Drupal::service('module_handler');
     if ($moduleHandler->moduleExists('mailchimp_ecommerce_commerce')) {
       $desired_type = 'commerce_product';
@@ -151,7 +152,7 @@ class MailchimpEcommerceAdminSettings extends ConfigFormBase {
 
     $field_definitions = [];
     foreach ($field_map as $entity_type => $fields) {
-      $field_definitions[$entity_type] = \Drupal::entityManager()->getFieldStorageDefinitions($entity_type);
+      $field_definitions[$entity_type] = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions($entity_type);
     }
     foreach ($field_map as $entity_type => $fields) {
       if ($entity_type == $desired_type) {
@@ -183,7 +184,7 @@ class MailchimpEcommerceAdminSettings extends ConfigFormBase {
         '#collapsible' => FALSE,
       ];
       $form['sync']['products'] = [
-        '#markup' => \Drupal::l(t('Sync existing products to Mailchimp'), Url::fromRoute('mailchimp_ecommerce.sync'))
+        '#markup' => Link::fromTextAndUrl(t('Sync existing products to Mailchimp'), Url::fromRoute('mailchimp_ecommerce.sync'))->toString(),
       ];
       $form['sync-orders'] = [
         '#type' => 'fieldset',
@@ -191,7 +192,7 @@ class MailchimpEcommerceAdminSettings extends ConfigFormBase {
         '#collapsible' => FALSE,
       ];
       $form['sync-orders']['orders'] = [
-        '#markup' => \Drupal::l(t('Sync existing orders to Mailchimp'), Url::fromRoute('mailchimp_ecommerce.sync_orders')),
+        '#markup' => Link::fromTextAndUrl(t('Sync existing orders to Mailchimp'), Url::fromRoute('mailchimp_ecommerce.sync_orders'))->toString(),
       ];
     }
 
@@ -205,7 +206,7 @@ class MailchimpEcommerceAdminSettings extends ConfigFormBase {
     return $settings_form;
   }
 
-  public function _submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function _submitForm(array &$form, FormStateInterface $form_state) {
     $store_id = \Drupal::config('mailchimp_ecommerce.settings')->get('mailchimp_ecommerce_store_id');
     if (\Drupal::config('mailchimp_ecommerce.settings')->get('mailchimp_ecommerce_store_id') == NULL) {
       $store_id = mailchimp_ecommerce_generate_store_id();

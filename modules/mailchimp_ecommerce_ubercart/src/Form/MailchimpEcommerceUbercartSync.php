@@ -2,6 +2,7 @@
 
 namespace Drupal\mailchimp_ecommerce_ubercart\Form;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\mailchimp_ecommerce\Form\MailchimpEcommerceSync;
 
 class MailchimpEcommerceUbercartSync extends MailchimpEcommerceSync {
@@ -9,7 +10,7 @@ class MailchimpEcommerceUbercartSync extends MailchimpEcommerceSync {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
 
     return $form;

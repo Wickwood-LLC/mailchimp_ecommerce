@@ -23,7 +23,7 @@ class StoreHandler implements StoreHandlerInterface {
       }
       else {
         mailchimp_ecommerce_log_error_message('Unable to get store: ' . $e->getMessage());
-        drupal_set_message($e->getMessage(), 'error');
+        \Drupal::messenger()->addError($e->getMessage());
       }
     }
 
@@ -48,7 +48,7 @@ class StoreHandler implements StoreHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to add a new store: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 
@@ -68,7 +68,7 @@ class StoreHandler implements StoreHandlerInterface {
     }
     catch (\Exception $e) {
       mailchimp_ecommerce_log_error_message('Unable to update a store: ' . $e->getMessage());
-      drupal_set_message($e->getMessage(), 'error');
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 

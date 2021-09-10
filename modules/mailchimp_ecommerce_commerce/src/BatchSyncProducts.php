@@ -2,6 +2,7 @@
 
 namespace Drupal\mailchimp_ecommerce_commerce;
 
+use Drupal\commerce_product\Entity\Product;
 /**
  * Batch process handler for syncing product data to Mailchimp.
  */
@@ -21,7 +22,7 @@ class BatchSyncProducts {
 
     foreach ($batch as $product_id) {
       /** @var \Drupal\commerce_product\Entity\Product $product */
-      $product = \Drupal\commerce_product\Entity\Product::load($product_id);
+      $product = Product::load($product_id);
 
       $title = (!empty($product->get('title')->value)) ? $product->get('title')->value : '';
       $description = (!empty($product->get('body')->value)) ? $product->get('body')->value : '';

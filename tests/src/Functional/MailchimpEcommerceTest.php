@@ -29,7 +29,7 @@ class MailchimpEcommerceTest extends FunctionalMailchimpTestBase {
       ->set('api_key', 'TEST_KEY')
       ->set('test_mode', TRUE)
       ->save();
-    $assert_session = $this->assertSession();
+    $this->drupalLogin($this->lowUser);
     $this->drupalGet('/admin/config/services/mailchimp/ecommerce');
     $this->assertResponse(403);
     $this->drupalLogin($this->adminUser);
@@ -40,7 +40,7 @@ class MailchimpEcommerceTest extends FunctionalMailchimpTestBase {
       'mailchimp_ecommerce_list_id' => '57afe96172',
       'mailchimp_ecommerce_currency' => 'USD',
     ], 'Save configuration');
-    $assert_session->pageTextContains('The configuration options have been saved');
+    $this->assertText('The configuration options have been saved');
   }
 
 }
